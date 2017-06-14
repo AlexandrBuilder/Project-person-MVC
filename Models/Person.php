@@ -6,8 +6,8 @@
  * Date: 14.06.2017
  * Time: 10:52
  */
-require_once __DIR__ . "/../classes/BD.php";
-
+//require_once __DIR__ . "/../classes/BD.php";
+require_once __DIR__ . "/../avtoload.php";
 class Person
 {
     public $id;
@@ -18,7 +18,14 @@ class Person
     public function GetAll()
     {
         $bd=new BD();
-        return $bd->qury("SELECT * FROM `Person`","Person");
+        return $bd->queryAll("SELECT * FROM `Person`","Person");
+        //return $bd->qury("SELECT * FROM `Person`");
+    }
+
+    public function GetOne($id)
+    {
+        $bd=new BD();
+        return $bd->queryOne("SELECT * FROM `Person` WHERE id='$id'","Person");
         //return $bd->qury("SELECT * FROM `Person`");
     }
   /*  public function __construct($name="",$phone="",$age="",$id="")

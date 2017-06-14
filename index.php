@@ -6,11 +6,20 @@
  * Time: 19:21
  */
 header("Content-Type: text/html; charset=UTF-8");
-require_once __DIR__ . "/Models/Person.php";
+require_once __DIR__ . "/avtoload.php";
+//require_once __DIR__ . "/Contoroler/NewControler.php";
+$ctrl=isset($_GET['ctrl']) ? $_GET['ctrl'] : 'New';
+$act=isset($_GET['act']) ? $_GET['act'] : 'All';
+//$con=new NewControler();
 
+$controlerName=$ctrl."Controler";
 
+//require_once __DIR__ . "/Contoroler/".$controlerName.".php";
+
+$controler=new $controlerName;
+;
+$method='action'.$act;
 //$person=new Person();
 //$items=$person->GetAll();
-$items=Person::GetAll();
-var_dump($items);
-require_once __DIR__ . "/views/index.php";
+//$con->actionAll();
+$controler->$method();

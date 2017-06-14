@@ -15,26 +15,33 @@ class BD
      */
     public function __construct()
     {
-        mysql_connect("localhost","mysql","mysql");
+        mysql_connect("localhost", "mysql", "mysql");
         mysql_select_db("test");
         mysql_query("SET NAMES utf8") or die("Не установленна кодировка");
 
 
     }
 
-    public function qury($sql,$class)
-    //public function qury($sql)
+    public function queryAll($sql, $class)
+        //public function qury($sql)
     {
-        $res=mysql_query($sql)or die("Не установленна кодировка");
-        if($res===false)
-          return false;
+        $res = mysql_query($sql) or die("Не установленна кодировка");
+        if ($res === false)
+            return false;
 
-        $arr=[];
-        while($row=mysql_fetch_object($res,"Person"))
-          //  while($row=mysql_fetch_object($res))
+        $arr = [];
+        while ($row = mysql_fetch_object($res, "Person")) //  while($row=mysql_fetch_object($res))
         {
-            $arr[]=$row;
+            $arr[] = $row;
         }
         return $arr;
     }
+
+
+    public function queryOne($sql, $class)
+        //public function qury($sql)
+    {
+        return $this->queryAll($sql, $class)[0];
+    }
+
 }
